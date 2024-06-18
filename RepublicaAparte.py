@@ -4,7 +4,7 @@ import numpy as np
 alambique_actual = 60
 produccion_lote_actual = 262.5  # litros
 botellas_por_lote_actual = produccion_lote_actual / 0.75  # botellas
-tiempo_embotellado_por_botella = 25  # segundos
+tiempo_embotellado_por_botella = 39.38  # segundos
 descarte_porcentaje = 23 / 1200  # 1.92%
 
 coste_unitario_botella = 1200  # pesos
@@ -98,3 +98,43 @@ print("Incremento de Tiempo de Embotellado: {:.2f}%".format(tiempo_incremento))
 print("Incremento de Producción de Botellas: {:.2f}%".format(produccion_incremento))
 print("Incremento de Tiempo de Embotellado con Ambos Alambiques: {:.2f}%".format((tiempo_total_escalado_ambos - tiempo_total_actual) / tiempo_total_actual * 100))
 print("Incremento de Producción de Botellas con Ambos Alambiques: {:.2f}%".format((botellas_efectivas_escalado_ambos - botellas_efectivas_actual) / botellas_efectivas_actual * 100))
+
+#Generar grafico de barras comparando los resultados utilizando plotly
+import plotly.graph_objects as go
+
+fig = go.Figure(data=[
+    go.Bar(name='Actual', x=['Tiempo de Embotellado'], y=[tiempo_total_actual/60], text=[f'{tiempo_total_actual/60:.2f} horas'], textposition='auto'),
+    go.Bar(name='Escalado', x=['Tiempo de Embotellado'], y=[tiempo_total_escalado/60], text=[f'{tiempo_total_escalado/60:.2f} horas'], textposition='auto'),
+    go.Bar(name='Escalado con Ambos Alambiques', x=['Tiempo de Embotellado'], y=[tiempo_total_escalado_ambos/60], text=[f'{tiempo_total_escalado_ambos/60:.2f} horas'], textposition='auto')
+])
+
+fig.update_layout(barmode='group', title='Tiempo de Embotellado', yaxis_title='Horas')
+fig.show()
+
+
+fig = go.Figure(data=[
+    go.Bar(name='Actual', x=['Botellas Efectivas'], y=[botellas_efectivas_actual], text=[f'{botellas_efectivas_actual}'], textposition='auto'),
+    go.Bar(name='Escalado', x=['Botellas Efectivas'], y=[botellas_efectivas_escalado], text=[f'{botellas_efectivas_escalado}'], textposition='auto'),
+    go.Bar(name='Escalado con Ambos Alambiques', x=['Botellas Efectivas'], y=[botellas_efectivas_escalado_ambos], text=[f'{botellas_efectivas_escalado_ambos}'], textposition='auto')
+])
+
+fig.update_layout(barmode='group', title='Botellas Efectivas', yaxis_title='Cantidad')
+fig.show()
+
+
+#Generar grafico de torta comparando los resultados utilizando plotly
+fig = go.Figure(data=[go.Pie(labels=['Botellas Efectivas', 'Botellas Descartadas'], values=[botellas_efectivas_escalado_ambos, botellas_descartadas_escalado_ambos], textinfo='label+percent+value')])
+fig.update_layout(title='Producción Con Ambos Alambiques')
+fig.show()
+
+#Generar grafico de barras comparando ganancias brutas utilizando plotly
+
+fig = go.Figure(data=[
+    go.Bar(name='Actual', x=['Ganancia Bruta'], y=[venta_total_actual - costo_total_actual], text=[f'{venta_total_actual - costo_total_actual} pesos'], textposition='auto'),
+    go.Bar(name='Escalado', x=['Ganancia Bruta'], y=[venta_total_escalado - costo_total_escalado], text=[f'{venta_total_escalado - costo_total_escalado} pesos'], textposition='auto'),
+    go.Bar(name='Escalado con Ambos Alambiques', x=['Ganancia Bruta'], y=[venta_total_escalado_ambos - costo_total_escalado_ambos], text=[f'{venta_total_escalado_ambos - costo_total_escalado_ambos} pesos'], textposition='auto')
+])
+
+fig.update_layout(barmode='group', title='Ganancia Bruta', yaxis_title='Pesos')
+fig.show()
+
