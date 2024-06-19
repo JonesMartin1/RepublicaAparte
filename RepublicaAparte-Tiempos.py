@@ -24,6 +24,12 @@ Evaporacion = 80
 #Variables globales con respecto a la temperatura
 Chiller = random.randrange(4,15)
 
+def generar_arreglo(cantidad_variaciones):
+    arreglo = []
+    for _ in range(cantidad_variaciones):
+        numero_aleatorio = random.randrange(12, 19)
+        arreglo.append(numero_aleatorio)
+    return arreglo
 
 def chiCuadrado(numeros: list, rango=10, E=0.005):
     # Convertir los números a una escala de 0 a 1 si es necesario
@@ -83,13 +89,12 @@ def clasificar_numeros(lista):
     # Transforma cada número aleatorio en una marca de clase la cuál está relacionada por una distribución 
     return clasificados
 
-clima = random.randrange(12,18)
-
-def procesar_y_sumar(clima):
+def procesar_y_sumar(clasificados):
     contador = 0
     tiempo = 0
     
-    for valor in clima:
+    for valor in clasificados:
+        print(valor)
         contador += 1
         if valor == 12:
             tiempo +=  (goteado + EnfriarChiller1 + CalentarSolucion + Cabeza + Corazon + Homogeneizacion1 + Homogeneizacion2)
@@ -112,6 +117,9 @@ def procesar_y_sumar(clima):
         elif valor == 18:
             tiempo +=  (goteado + EnfriarChiller2 + CalentarSolucion + Cabeza + Corazon + Homogeneizacion1 + Homogeneizacion2)
             print("Día lento de trabajo donde el chiller tarda en enfríar debido a las altas temperaturas")
+        else:
+            tiempo +=  (goteado + EnfriarChiller2 + CalentarSolucion + Cabeza + Corazon + Homogeneizacion1 + Homogeneizacion2)
+            print("Día lento de trabajo donde el chiller tarda en enfríar debido a las altas temperaturas")
             
     return tiempo/60 + contador * macerado/60
 
@@ -123,7 +131,7 @@ p = int(input("Introducir el número de iteraciones de tiempo: "))
 aleatorios = generador_aleatorio_mixto1(9999, 1103515244, 12345, (2**31-1), p)
 
 # Llamar a las funciones siguientes con los resultados
-resultado_clasificacion = clasificar_numeros(aleatorios)
+resultado_clasificacion = generar_arreglo(p)
 resultado_procesamiento = procesar_y_sumar(resultado_clasificacion)
 
 print("Resultado final:", resultado_procesamiento, "horas para producir", p, "lotes de República Aparte")
