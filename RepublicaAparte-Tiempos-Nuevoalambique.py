@@ -9,10 +9,10 @@ goteado = 20
 EnfriarChiller1 = 50
 EnfriarChiller2 = 70
 CalentarSolucion = 60
-Cabeza = 40
-Corazon = 210
-Homogeneizacion1 = 15
-Homogeneizacion2 = 20
+Cabeza = (40*5)
+Corazon = (210*5)
+Homogeneizacion1 = 20
+Homogeneizacion2 = 30
 
 #Variables globales con respecto a la producción en litros
 SolucionCondensada = 50
@@ -125,6 +125,7 @@ def procesar_y_sumar(clasificados):
 
 
 # Introducir valores desde la entrada del usuario
+print("*********** Simulación con alambique a escala de 300 litros ***********")
 p = int(input("Introducir el número de iteraciones de tiempo: "))
 
 # Llamar a la función generador_aleatorio_mixto1 con los valores introducidos por el usuario
