@@ -27,7 +27,7 @@ Chiller = random.randrange(4,15)
 def generar_arreglo(cantidad_variaciones):
     arreglo = []
     for _ in range(cantidad_variaciones):
-        numero_aleatorio = random.randrange(17, 19)
+        numero_aleatorio = random.randrange(12, 19)
         arreglo.append(numero_aleatorio)
     return arreglo
 

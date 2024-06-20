@@ -92,36 +92,45 @@ def clasificar_numeros(lista):
 def procesar_y_sumar(clasificados):
     contador = 0
     tiempo = 0
+    tiempo1 = 0
     
     for valor in clasificados:
         print("La temperatura del clima en el periodo de díá de producción", contador+1, "es de", valor, "grados")
         contador += 1
         if valor == 12:
             tiempo +=  (goteado + EnfriarChiller1 + CalentarSolucion + Cabeza + Corazon + Homogeneizacion1 + Homogeneizacion2)
+            tiempo1 +=  (goteado + EnfriarChiller1 + CalentarSolucion + Cabeza*5 + Corazon*5 + Homogeneizacion1+5 + Homogeneizacion2+10)
             print("Día normal de trabajo donde todo funciona correctamente")
         elif valor == 13:
             tiempo +=  (goteado + EnfriarChiller1 + CalentarSolucion + Cabeza + Corazon + Homogeneizacion1 + Homogeneizacion2)
+            tiempo1 +=  (goteado + EnfriarChiller1 + CalentarSolucion + Cabeza*5 + Corazon*5 + Homogeneizacion1+5 + Homogeneizacion2+10)
             print("Día normal de trabajo donde todo funciona correctamente")
         elif valor == 14:
             tiempo +=  (goteado + EnfriarChiller1 + CalentarSolucion + Cabeza + Corazon + Homogeneizacion1 + Homogeneizacion2)
+            tiempo1 +=  (goteado + EnfriarChiller1 + CalentarSolucion + Cabeza*5 + Corazon*5 + Homogeneizacion1+5 + Homogeneizacion2+10)
             print("Día normal de trabajo donde todo funciona correctamente")
         elif valor == 15:
             tiempo +=  (goteado + EnfriarChiller1 + CalentarSolucion + Cabeza + Corazon + Homogeneizacion1 + Homogeneizacion2)
+            tiempo1 +=  (goteado + EnfriarChiller1 + CalentarSolucion + Cabeza*5 + Corazon*5 + Homogeneizacion1+5 + Homogeneizacion2+10)
             print("Día normal de trabajo donde todo funciona correctamente")
         elif valor == 16:
             tiempo +=  (goteado + EnfriarChiller1 + CalentarSolucion + Cabeza + Corazon + Homogeneizacion1 + Homogeneizacion2)
+            tiempo1 +=  (goteado + EnfriarChiller1 + CalentarSolucion + Cabeza*5 + Corazon*5 + Homogeneizacion1+5 + Homogeneizacion2+10)
             print("Día normal de trabajo donde todo funciona correctamente")
         elif valor == 17:
             tiempo +=  (goteado + EnfriarChiller1 + CalentarSolucion + Cabeza + Corazon + Homogeneizacion1 + Homogeneizacion2)
+            tiempo1 +=  (goteado + EnfriarChiller1 + CalentarSolucion + Cabeza*5 + Corazon*5 + Homogeneizacion1+5 + Homogeneizacion2+10)
             print("Día normal de trabajo donde todo funciona correctamente")
         elif valor == 18:
             tiempo +=  (goteado + EnfriarChiller2 + CalentarSolucion + Cabeza + Corazon + Homogeneizacion1 + Homogeneizacion2)
+            tiempo1 +=  (goteado + EnfriarChiller2 + CalentarSolucion + Cabeza*5 + Corazon*5 + Homogeneizacion1+5 + Homogeneizacion2+10)
             print("Día lento de trabajo donde el chiller tarda en enfríar debido a las altas temperaturas")
         else:
             tiempo +=  (goteado + EnfriarChiller2 + CalentarSolucion + Cabeza + Corazon + Homogeneizacion1 + Homogeneizacion2)
+            tiempo1 +=  (goteado + EnfriarChiller2 + CalentarSolucion + Cabeza*5 + Corazon*5 + Homogeneizacion1+5 + Homogeneizacion2+10)
             print("Día lento de trabajo donde el chiller tarda en enfríar debido a las altas temperaturas")
             
-    return tiempo/60 + contador * macerado/60
+    return [tiempo/60 + contador * macerado/60, tiempo1/60 + contador * macerado/60, ((tiempo1/tiempo)*100)]
 
 
 # Introducir valores desde la entrada del usuario
@@ -132,6 +141,12 @@ aleatorios = generador_aleatorio_mixto1(9999, 1103515244, 12345, (2**31-1), p)
 
 # Llamar a las funciones siguientes con los resultados
 resultado_clasificacion = generar_arreglo(p)
-resultado_procesamiento = procesar_y_sumar(resultado_clasificacion)
+resultado_procesamiento0 = procesar_y_sumar(resultado_clasificacion)
 
-print("Resultado final:", resultado_procesamiento, "horas para producir", p, "lotes de República Aparte")
+
+
+print("Resultado final:", resultado_procesamiento0[0], "horas para producir", p, "lotes de República Aparte")
+print("*********** Simulación con alambique a escala de 300 litros ***********")
+print("Resultado final:", resultado_procesamiento0[1], "horas para producir", p, "lotes de República Aparte")
+print("*********** Comparación de las simulaciones ***********")
+print("Resultado final: Hubo un " + str(round(resultado_procesamiento0[2])) + "% de aumento en el tiempo de producción")
